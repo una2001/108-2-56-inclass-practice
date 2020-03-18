@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1584509645018.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3363858985",
+    "id" : "16B3D898",
+    "lastKnownWriteTime" : 1584510062,
+    "last_content_update" : 1584510062147,
+    "path" : "~/GitHub/108-2-56-inclass-practice/r markdown.Rmd",
+    "project_path" : "r markdown.Rmd",
+    "properties" : {
+        "cursorPosition" : "11,13",
+        "scrollLine" : "1",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
