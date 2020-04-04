@@ -1,0 +1,88 @@
+---
+title: "List"
+author: "楊于萱"
+date: "2020/4/4"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## List
+
+```{r}
+vectorExample <- c(2, 6, 7)
+listExample <- list(2, 6, 7)
+
+print(vectorExample)
+print(listExample)
+```
+
+每個元素值可以是不同type的物件值
+```{r}
+# 用vector儲存
+c("2020-03-31T13:40:55Z", "一芳", "2", "水果茶")
+
+# 用list儲存
+library(lubridate)
+`小明交易1` <- list(
+  ymd_hms("2020-03-31T13:40:55Z"), #Date/Time 
+     "一芳", #Character
+     2, #Numeric
+     "水果茶" #Character
+  )
+print(`小明交易1`)
+```
+
+物件值可以是vector形式，也可以list。
+```{r}
+# 用vector
+c(
+  c("108學年第1學期","高級會計學","高等統計學"), #向量1
+  c("108學年第2學期","食在拉丁美洲") #向量2
+)
+```
+
+```{r}
+# 用list
+list(
+  c("108學年第1學期","高級會計學","高等統計學"), #向量1
+  c("108學年第2學期","食在拉丁美洲") #向量2
+)
+```
+
+```{r}
+# list含兩個lists, 子層list又各含兩個vectors
+`小明108學年課表C` <- list(
+  `108學年第1學期`=list(
+    c("108-1"), # 可只寫 "108-1"
+    c("高級會計學","高等統計學")
+       ),
+  `108學年第2學期`=list(
+    c("108-2"),
+    c("食在拉丁美洲")
+  )
+)
+print(`小明108學年課表C`)
+```
