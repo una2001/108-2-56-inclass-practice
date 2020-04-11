@@ -161,3 +161,94 @@ str(taipeiNightMarkets[c(1,3,5,14)],max.level = 1)
 taipeiNightMarkets[c(2,13)]
 ```
 
+##  用「要/不要」邏輯向量選`[c(T,T,F,...)]`{-}
+
+```{r}
+vectorExample
+vectorExample[c(T,T,F)] # 要，要，不要
+```
+
+```{r}
+str(listExample)
+str(listExample[c(F,T)]) # 不要，要
+str(listExample[c("學期")]) # 同173
+str(listExample[c(T,T)]) # 要，要
+```
+
+用「要/不要」邏輯向量自taipeiNightMarkets選出 寧夏觀光夜市，西昌街觀光夜市，大龍街夜市， 雙城街夜市
+
+```{r}
+names(taipeiNightMarkets)
+```
+
+```{r}
+c(T,F,
+  F,F,
+  T,F,
+  F,F,
+  F,T,
+  F,F,
+  F,T) -> selectedMarkets
+taipeiNightMarkets[selectedMarkets]
+str(taipeiNightMarkets[c(T,F,
+                         F,F,
+                         T,F,
+                         F,F,
+                         F,T,
+                         F,F,
+                         F,T)], max.level=1)
+```
+
+```{r}
+selectedMarkets <- rep(F,14) # repeat F by 14 times
+print(selectedMarkets)
+selectedMarkets[c(1,5,10,14)] <- TRUE
+print(selectedMarkets)
+```
+
+```{r}
+str(taipeiNightMarkets[selectedMarkets],max.level = 1)
+```
+
+```{r, results='asis'}
+str(listExample,max.level = 3)
+```
+
+```
+listExample: length=2, list class
+  |
+  |--student: length=1, character class
+  |
+  |--學期: length=3, list class
+```
+
+以下兩個表面都是選取“學期”:
+```{r}
+get1 <- listExample[["學期"]]
+get2 <- listExample["學期"]
+```
+
+`[[]]`: 拿出某個物件值。
+
+```{r}
+# get1 # 學期拿出來，有3個元素的list
+str(listExample,max.level = 3)
+```
+
+```{r}
+get1 <- listExample[["學期"]]
+str(get1, max.level = 3)
+```
+
+`[]`: 留下某個物件值。
+
+```{r}
+# get1 # 學期拿出來，有3個元素的list
+str(listExample,max.level = 3)
+```
+
+```{r}
+get2 # listExample 只留下 學期元素，是個只有一個元素的list
+str(get2)
+```
+
