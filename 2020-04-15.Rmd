@@ -42,3 +42,73 @@ str(get1_layer2)
 ```{r}
 get1_layer2$teacher
 ```
+
+```{r}
+get1 <- listExample[["學期"]]
+get1$`108-1` <- get1_layer1
+get1_layer1[[1]] <- get1_layer2
+get1_layer2$teacher
+
+listExample[["學期"]]$`108-1`[[1]]$teacher
+```
+
+### get2 取出
+```{r}
+get2 <- listExample["學期"]
+get2_layer1 <- get2[[1]] #get2$`學期`, get2[["學期"]]
+get2_layer2 <- get2_layer1[["108-1"]]
+get2_layer3 <- get2_layer2[[1]]
+get2_layer3$teacher
+
+listExample["學期"][["學期"]][["108-1"]][[1]]$teacher
+```
+
+#### list應用{-}
+
+```{r}
+vector1 <- c(a=1, b=3, c=4)
+vector1[["a"]]
+vector1[c("a","c")]
+vector1$a #不能用
+
+list1 <- list(a=1,b=3,c=4)
+list1[["a"]]
+list1[c("a","c")]
+list1$a
+```
+
+今明兩日台北市、新北市氣溫:
+```{r}
+today <- list(
+  list("台北市",c(highest_temp = 25),c(lowest_temp = 18)),
+  list("新北市",c(highest_temp = 24),c(lowest_temp = 15)))
+str(today)
+```
+
+```{r}
+today[[1]][[2]]
+```
+
+
+```{r}
+today <- list(
+  list("台北市",highest_temp=c(highest_temp = 25),
+       lowest_temp=c(lowest_temp = 18)),
+  list("新北市",highest_temp=c(highest_temp = 24),
+       lowest_temp=c(lowest_temp = 15)))
+str(today)
+```
+
+```{r}
+today[[1]]$highest_temp
+```
+
+```{r}
+tomorrow <- list(
+  list("台北市",c(highest_temp = 25),c(lowest_temp = 18)),
+  list("新北市",c(highest_temp = 24),c(lowest_temp = 15)))
+
+weather <- list(today,tomorrow)
+
+str(weather)
+```
