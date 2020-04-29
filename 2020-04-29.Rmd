@@ -126,6 +126,11 @@ c(175, 166, 170, 160) >= 170
 example$name[pick_above170]
 ```
 
-```{r}
+###### 不同屆入學學生在2年級的學業表現
 
+```{r}
+source("https://www.dropbox.com/s/qsrw069n94k61lj/transcript100to103_list.R?dl=1")
+```
+```{r}
+str(transcript100to103)
 ```
