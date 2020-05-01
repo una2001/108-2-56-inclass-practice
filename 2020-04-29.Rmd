@@ -134,3 +134,56 @@ source("https://www.dropbox.com/s/qsrw069n94k61lj/transcript100to103_list.R?dl=1
 ```{r}
 str(transcript100to103)
 ```
+
+```{r}
+# 各學屆2年級人數
+table(transcript100to103$學屆)
+# 各學屆2年級成績大於85人數
+table(transcript100to103$學屆[pick_above85])
+```
+
+###### 選成績大於85分{-}
+
+```{r}
+# 只要成績大於85的
+pick_above85 <-
+  transcript100to103$`成績` > 85
+```
+
+```{r}
+# 各學屆2年級人數
+table(transcript100to103$學屆)
+# 各學屆2年級成績大於85人數
+table(transcript100to103$學屆[pick_above85])
+```
+
+***
+##### 時間比較:
+###### example裡誰1998年(含)以後出生{-}
+
+```{r}
+example$birthday
+class(example$birthday)
+typeof(example$birthday)
+```
+
+```{r}
+print(example[c("name","birthday")])
+
+pick_after98 <- example$birthday >= lubridate::ymd("1998-01-01")
+example$name[pick_after98]
+```
+
+###### 美元匯率{-}
+
+```{r}
+source("https://www.dropbox.com/s/16h6ggua6qtydci/exchangeRate.R?dl=1")
+```
+
+```{r}
+str(exchangeRate)
+```
+
+```{r}
+
+```
