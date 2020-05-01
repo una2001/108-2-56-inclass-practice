@@ -243,3 +243,38 @@ class(example$allowance)
 example$allowance <- 
   ordered(example$allowance)
 ```
+
+或在設定為factor時即把levels排好，並ordered=T:
+
+```{r}
+example$allowance <-
+  factor(
+    example$allowance,
+    levels=c("0-1000", "1001-2000", "2000+"),
+    ordered = T # 設定為可排序factor
+  )
+```
+
+```{r}
+example$allowance <-
+  factor(
+    c("0-1000","1001-2000", "2000+", "1001-2000"),
+    levels = c("0-1000", "1001-2000", "2000+"),
+    ordered = T # 設定為可排序factor
+  )
+```
+
+```{r}
+pick_allowanceOver1000 <- example$allowance >= "1001-2000"
+example$name[pick_allowanceOver1000]
+```
+
+###### 刑事案件被害者人數 {-}
+
+```{r}
+jsonlite::fromJSON("https://www.dropbox.com/s/3uijub7xheib405/list_victimAges_female.json?dl=1", simplifyDataFrame = F) -> list_victimAges_female
+```
+
+```{r}
+str(list_victimAges_female)
+```
