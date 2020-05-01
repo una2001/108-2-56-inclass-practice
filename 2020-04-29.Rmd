@@ -184,6 +184,62 @@ source("https://www.dropbox.com/s/16h6ggua6qtydci/exchangeRate.R?dl=1")
 str(exchangeRate)
 ```
 
+情境:
 ```{r}
+exchangeRate_after98 <-
+  list(
+    `期間`=exchangeRate$`期間`[pick_after98_01],
+    `幣別`=exchangeRate$`幣別`[pick_after98_01],
+    `匯率`=exchangeRate$`匯率`[pick_after98_01]
+    
+  )
+```
 
+###### 選1998年1月(含)以後的匯率{-}
+
+```{r}
+# 只要1998年1月（含）以後的
+library(lubridate)
+pick_after98_01 <- exchangeRate$期間 >= ymd("1998-01-01")
+```
+
+###### 選1998年1月(含)以後的匯率資料{-}
+
+```{r}
+exchangeRate_after98 <-
+  list(
+    `期間`= exchangeRate$期間[pick_after98_01],
+    `幣別`= exchangeRate$幣別[pick_after98_01],
+    `匯率`= exchangeRate$匯率[pick_after98_01]
+  )
+```
+
+***
+##### 可排序類別資料比較: {-}
+###### example裡誰零用錢大於1000: {-}
+
+```{r}
+print(example[c("name","allowance")])
+
+pick_allowanceOver1000 <- example$allowance >= "1001-2000"
+example$name[pick_allowanceOver1000]
+```
+
+factor資料可進一步分成可排序，與不可排序的，如：
+* 可排序： 以年齡層區分的類別，以所得級距區分的類別等。
+* 不排序： 性別，學系等。
+
+factor的設定在不調整時內定為不可排序資料，如要改成可排序類別資料，以先前已處理好的example$allowance 為例：
+
+```{r}
+levels(example$allowance)
+```
+
+```{r}
+class(example$allowance)
+```
+
+```{r}
+example$allowance <- 
+  ordered(example$allowance)
 ```
