@@ -278,3 +278,66 @@ jsonlite::fromJSON("https://www.dropbox.com/s/3uijub7xheib405/list_victimAges_fe
 ```{r}
 str(list_victimAges_female)
 ```
+
+### 相等，屬於
+`==`: 等於
+
+`!=`: 不等於
+
+`==`與`!=`可使用於字串
+
+###### example裡誰血型B型 {-}
+```{r}
+print(example[c("name", "bloodType")])
+pick_bloodB <- example$bloodType == "B"
+example$name[pick_bloodB]
+```
+
+```{r}
+sequenceNums <- c(11, 6, 8, 11, 12, 11, 3, 7, 10, 8)
+
+pick_evens <- (sequenceNums %% 2) == 0
+sequenceNums[pick_evens]
+```
+創造可留下偶數的「要/不要」向量pick_evens
+
+還有一個常用的關聯運算：
+
+`%in%`: 屬於
+
+  *左邊元素「一一」檢視是不是屬於右邊元素集合。
+
+```{r}
+x <- c(1,5,8)
+y <- c(5,8)
+
+# x裡的元素值是不是屬於y集合
+x %in% y
+```
+
+###### example裡誰來自大台北
+
+```{r}
+print(example[c("name", "residence")])
+set_TaipeiMetro <- c("Taipei", "New Taipei")
+pick_fromTaipeiMetro <- example$residence %in% set_TaipeiMetro
+example$name[pick_fromTaipeiMetro]
+```
+
+創造 可選出來自法商學院的「要/不要」向量，pick_lawBusiness
+```{r}
+source("https://www.dropbox.com/s/qsrw069n94k61lj/transcript100to103_list.R?dl=1")
+```
+
+```{r}
+str(transcript100to103)
+```
+
+```{r}
+set_LawBussines <- c("法學院", "商學院")
+pick_LawBusiness <- transcript100to103$學院 %in% set_LawBussines
+```
+
+```{r}
+
+```
