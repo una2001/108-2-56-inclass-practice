@@ -332,10 +332,70 @@ source("https://www.dropbox.com/s/qsrw069n94k61lj/transcript100to103_list.R?dl=1
 ```{r}
 str(transcript100to103)
 ```
+```{r}
+levels(factor(transcript100to103$學院))
+unique(transcript100to103$學院)
+```
 
 ```{r}
 set_LawBussines <- c("法學院", "商學院")
 pick_LawBusiness <- transcript100to103$學院 %in% set_LawBussines
+```
+
+### 4.4.3 Negation(否定用法)
+在「要/不要」向量前加上!會成為否定句的「要/不要」向量，元素裡的TRUE會轉成FALSE, FALSE則轉成TRUE。
+
+```{r}
+pick_not_fromTaipeiMetro <- ! pick_fromTaipeiMetro
+# 或
+pick_not_fromTaipeiMetro <- !(example$residence %in% set_TaipeiMetro) # (..) 裡面會先運算完才做外面!的處理
+```
+
+```{r}
+print(example[c("name","residence")])
+
+example$name[pick_fromTaipeiMetro]
+example$name[pick_not_fromTaipeiMetro]
+```
+
+### 資料狀態
+  *is.na: 有缺失
+
+  *is.{class/type name}: is.integer, is.character, is.factor … etc
+```{r}
+x2 <- c(1,NA,10)
+y2 <- c(-1,NA,20)
+
+x3 <- c(NA,"小花")
+y3 <- c(NA,"小華")
+```
+
+```{r}
+x2
+is.na(x2)
+```
+
+###### example裡誰沒有體重資料 {-}
+
+```{r}
+print(example[c("name", "weight")])
+pick_na <- is.na(example$weight)
+example$name[pick_na]
+```
+
+R還有一種特別的缺失資料NaN (即not a number)，出現在沒有定義的數學運算上，如：`0/0`
+
+創立 可選出缺失資料的「要/不要」向量pick_na, 並計算有多少筆缺失。
+```{r}
+jsonlite::fromJSON("https://www.dropbox.com/s/3uijub7xheib405/list_victimAges_female.json?dl=1", simplifyDataFrame = F) -> list_victimAges_female
+```
+
+```{r}
+list_victimAges_female$數目 <- as.integer(list_victimAges_female$數目)
+```
+
+```{r}
+str(list_victimAges_female)
 ```
 
 ```{r}
