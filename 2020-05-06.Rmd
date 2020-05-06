@@ -1,0 +1,71 @@
+---
+title: '2020-05-06'
+author: "楊于萱"
+date: "2020/5/6"
+output: html_document
+---
+## On logical class
+邏輯向量間（即「要/不要」向量）的操作主要是以下幾個：
+
+  *&: AND
+
+  *|: OR
+
+```{r}
+example <- list(
+  name=c("小明","小花","小新","美美"),
+  height=c(175,166,170,160),
+  weight=c(77,NA,60,43),
+  birthday=lubridate::ymd(c("1998-03-11","1999-12-22","1995-08-22","2001-10-10")),
+  hobby=c("美食 旅遊","旅遊 時尚","3C 美食","音樂 旅遊"),
+  residence=c("Taipei","New Taipei","Taichung","Kaohsiung"),
+  allowance=factor(c("0-1000","1001-2000","2000+","1001-2000")),
+  bloodType=c("A","B","B","O")
+)
+```
+
+```{r}
+str(example)
+pick_above170 <- example$height >= 170
+pick_bloodB <- example$bloodType == "B"
+pick_loveFood <- 
+  stringr::str_detect(example$hobby,"美食")
+pick_na <- is.na(example$weight)
+pick_after98 <- 
+  example$birthday >= lubridate::ymd("1998-01-01")
+set_TaipeiMetro <- c("Taipei","New Taipei")
+pick_fromTaipeiMetro <- 
+  example$residence %in% set_TaipeiMetro
+```
+
+###### 誰喜歡美食且血型為B型 {-}
+```{r}
+str(example[c("name", "hobby", "bloodType")])
+example$name[pick_loveFood & pick_bloodB]
+```
+
+###### 誰1998以後（含）出生或不住大台北 {-}
+```{r}
+str(example[c("name", "birthday", "residence")])
+example$name[pick_after98 | !pick_fromTaipeiMetro]
+```
+
+###### 誰1998以後（含）出生且住大台北且血型B型 {-}
+```{r}
+str(example[c("name", "birthday", "residence", 
+              "bloodType")])
+example$name[pick_after98 & pick_fromTaipeiMetro & pick_bloodB]
+```
+
+## On character class
+這節使用`stringr`套件，同時也有一小部份用到`glue`套件，請先下載安裝。
+```{r}
+library(stringr)
+library(glue)
+```
+
+對character vector每個元素進行部份資訊粹取：
+  *學號“410873002”，其中108是入學年，73是學系碼。 對100學年以後學生學系碼是固定在「第5、6位元」。
+```{r}
+str_sub("410873002", 5, 6)
+```
