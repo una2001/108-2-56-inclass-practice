@@ -1,0 +1,42 @@
+---
+title: '2020-06-12'
+author: "楊于萱"
+date: "2020/6/12"
+output: html_document
+---
+```{r}
+library(stringr)
+```
+##  Conditional Execution
+### if
+  *用在「某個條件符合才執行」的狀況。
+```{r}
+if(condition){
+  Body for TRUE
+  }
+```
+  *condition: 它是個「是/否」問句。 (使用條件判斷來產生答案T/F，是個logical。)
+
+判斷學號輸入正確與否
+
+readline()在Rmd裡只有當它單獨執行時才能正常運作，因為readline是個即時互動（interactive）函數，Rmd不是個即時互動環境。
+```{r}
+# 先執行此行輸入學號
+readline(prompt = "請輸入你的學號") -> studentId 
+
+# 之後才執行以下程式
+if(
+  str_detect(studentId,'^[43](1[01][0-9]|9[0-9])[0-9]{5}$',negate=T) # condition: 是否輸入學號正確？
+) {
+  warning("你所輸入的學號不正確")
+}
+```
+
+#### 確認使用者有安裝需要套件{-}
+
+```{r}
+if(!require(lubridate)){ # condition: 是否「沒安裝lubridate」？
+  install.packages("lubridate")
+}
+lubridate::ymd_hms("2020-07-01 13:00:00 GMT")
+```
