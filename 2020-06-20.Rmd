@@ -290,11 +290,111 @@ ymd_hms(glue::glue("{today()+days(1)} 00:20:00"),tz="Asia/Taipei") %>%
 ```
 
 
-```{R}
+###  logical condition
+由於if, if…else, if…if else…else, 都是用來決定要不要執行某個body，所以(condition) 必需要是「一個」T/F logical value。
 
+比對答案
+```{R}
+myAnswer <- c(2,3,6)
+correctAnswer <- c(2,3,5)
+
+if(myAnswer == correctAnswer){ # 只取用第一個T/F
+  print("你答對了")
+}
 ```
+
+all, any
+```{r}
+myAnswer <- c(2,3,6)
+correctAnswer <- c(2,3,5)
+
+if(all(myAnswer == correctAnswer)){ # 要全TRUE
+  print("你答對了")
+}
+```
+
+```{r}
+if(any(myAnswer == correctAnswer)){ # 只要有一個TRUE
+  print("裡頭有數字是對的")
+}
+```
+
+&& ||
+有時「資訊到這裡就夠判斷情境」會產生，這時可以用&&或｜｜
+
+對答案：
+
+class, 內容都要對
+```{r}
+myAnswer <- c(1,2,3)
+correctAnswer <- factor(c(1,2,3))
+
+if(is.factor(myAnswer) && all(myAnswer==correctAnswer)){
+  print("答對了")
+  10
+} else {
+  print("答錯了")
+  0
+}-> myGrade
+myGrade
+````
 
 
 ```{r}
+if(is.factor(myAnswer) & all(myAnswer==correctAnswer)){
+  print("答對了")
+  10
+} else {
+  print("答錯了")
+  0
+}-> myGrade
+myGrade
+```
 
+只要符合以下資格均可申請補助：
+
+  *年齡>=65
+
+  *家庭子孩數>3
+```{r}
+myAge <- 40
+myChildrenNumber <- 5
+
+if(myAge >=65 | myChildrenNumber >3){
+  "符合申請資格"
+} else {
+  warning("不符合申請資格")
+}
+
+if(myAge >=65 ||  myChildrenNumber >3){
+  "符合申請資格"
+} else {
+  warning("不符合申請資格")
+}
+```
+
+```{R}
+myAge <- 67
+myChildrenNumber <- 5
+```
+
+
+5.3節主要在介紹「依情境執行不同body」的conditional execution，另外還有「依情境不同產生不同值」的conditional assignment。
+
+一個logical relation:
+```{R}
+x <- c(2,5,10,-21,3,8)
+ifelse(x %% 2==0, "even", "odd")
+```
+
+多個logical relations:
+```{r}
+y <- sample(40:100,20, replace=T)
+dplyr::case_when(
+  y < 60 ~ "F",
+  60<=y & y < 70 ~"D",
+  70<=y & y < 80 ~"C",
+  80<=y & y < 90 ~"B",
+  90<=y ~ "A"
+)
 ```
